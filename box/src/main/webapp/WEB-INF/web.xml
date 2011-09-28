@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+
+	<!-- 
+	    Start the event initializer.
+	-->
+	<listener>
+		<listener-class>com.espad.box.EventsInitializer</listener-class>
+	</listener>
+
+	<!--
+	    Listener to deploy all EPL files (.epl) packages with the WAR file.
+	-->
+	<listener>
+		<listener-class>com.espertech.esper.server.webapp.EsperPrepackagedServletContextListener</listener-class>
+	</listener>
+	
+	<context-param>
+		<param-name>com.espertech.esper.context-param.uri</param-name>
+		<param-value>default</param-value>
+	</context-param>
+
+	<!-- 
+	    Start the Espad statements Listener.
+	-->
+	<listener>
+		<listener-class>com.espad.box.StatementsListener</listener-class>
+	</listener>
+
+	<!-- 
+	    Start the HTTP Listener.
+	-->
+	<listener>
+		<listener-class>com.espad.box.HTTPInputContextListener</listener-class>
+	</listener>
+
+	<!--
+	    Use below settings to pass resources via servlet initialization parameters instead.
+	-->
+	<!--
+	<listener>
+		<listener-class>com.espertech.esper.server.webapp.EsperParameterizedServletContextListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>com.espertech.esper.context-param.modules</param-name>
+		<param-value>optiontrade.epl</param-value>
+	</context-param>
+	-->
+
+</web-app>

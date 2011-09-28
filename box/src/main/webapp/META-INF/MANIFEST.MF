@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Ant
+Built-By: EsperTech
+Build-Jdk: 1.6.0_14
