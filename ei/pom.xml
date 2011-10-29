@@ -16,13 +16,32 @@
 		</repository>
 	</repositories>
   <build>
-		<plugins>
-      <plugin>
+	<plugins>
+  <plugin>
+    <artifactId>maven-clean-plugin</artifactId>
+    <configuration>
+      <filesets>
+        <fileset>
+          <directory>target/classes/eventdefs</directory>
+          <includes>
+            <include>**/*.csv</include>
+          </includes>
+          <followSymlinks>false</followSymlinks>
+        </fileset>
+      </filesets>
+    </configuration>
+  </plugin>
+<plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>exec-maven-plugin</artifactId>
           <configuration>
-              <executable>${project.basedir}/target/classes/eventdefs/genenames.cmd</executable>
+              <executable>perl</executable>
               <workingDirectory>${project.basedir}/target/classes/eventdefs/</workingDirectory>
+		<arguments>
+		<argument>
+			${project.basedir}/target/classes/eventdefs/ensuret.pl
+		</argument>
+		</arguments>
           </configuration>
            <executions>
             <execution>
@@ -34,6 +53,29 @@
             </execution>
           </executions>
       </plugin>
+      <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <configuration>
+              <executable>perl</executable>
+              <workingDirectory>${project.basedir}/target/classes/eventdefs/</workingDirectory>
+		<arguments>
+		<argument>
+			${project.basedir}/target/classes/eventdefs/gen.pl
+		</argument>
+		</arguments>
+          </configuration>
+           <executions>
+            <execution>
+              <phase>compile</phase>
+                <goals>
+                    <goal>exec</goal>
+                </goals>
+              <inherited>false</inherited>
+            </execution>
+          </executions>
+      </plugin>
+
       <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
