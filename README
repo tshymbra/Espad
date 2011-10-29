@@ -29,6 +29,16 @@ set CLASSPATH=%CLASSPATH%;%LIB%\httpcore-4.0.1.jar
 
 (note: replace x with actual Esper minor version)
 
+1. Build ei: 
+cd ei
+mvn clean install -Dmaven.test.skip=true
+
+2. Build box
+cd box
+mvn clean package -Dmaven.test.skip=true
+
+3. Deploy box, by copying created war into the Esper EE hotdeploy folder
+ 
 
 ARCHITECTURE
 ------------
