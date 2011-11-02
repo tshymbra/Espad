@@ -15,7 +15,6 @@ cp eventdefs/*.names $edefsfolder
 cp eventdefs/*.pl $edefsfolder
 cd $edefsfolder
 rm -f *.csv
-perl ensuret.pl
 perl gen.pl
 rm -f *.names
 rm -f *.pl
