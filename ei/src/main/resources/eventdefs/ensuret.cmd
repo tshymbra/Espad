@@ -1,1 +1,0 @@
-perl ensuret.pl
