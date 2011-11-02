@@ -2,8 +2,30 @@
 
 $numArgs = @ARGV;
 print "Number of arguments ".$numArgs."\n";
+
+$event_desriptors_file="events.names";
+open(DAT, $event_desriptors_file) || die("Could not open event desriptors file for reading!".$event_desriptors_file);
+@raw_event_descriptors =<DAT>; 
+close(DAT); 
   
-open(EVENT_NAMES, '<',"events.names".$eventnames_file) || die("Could not open event descriptors file ");
+open(NEW_DAT, '>', $event_desriptors_file) || die("Could not open event desriptors file for writing ".$event_desriptors_file);
+
+foreach $event_descriptor (@raw_event_descriptors) 
+{
+  $_ = $event_descriptor;
+  print "ensuring timestamp field is present in ".$event_descriptor."\n";	
+  if (/long timestamp/) {
+      print NEW_DAT ;
+  } else {
+      ~s/\s+$//;
+      print NEW_DAT;
+      print NEW_DAT ",long timestamp$/";
+  }
+}
+
+close(NEW_DAT);
+  
+open(EVENT_NAMES, '<',$event_desriptors_file) || die("Could not open event descriptors file for reading ");
 
 EVENT_DESCRIPTORS: while (<EVENT_NAMES>) {
   @eventname_and_properties = split /,/;
@@ -14,7 +36,7 @@ EVENT_DESCRIPTORS: while (<EVENT_NAMES>) {
   $eventname = $eventname_and_properties[0];
     
   open(EVENT_CSV_FILE, '>', $eventname.".csv") || die("Could not open event csv file ".$eventname);
-  print $eventname. "\n";
+  print "generated ".$eventname. "\n";
     
   if ($numArgs > 0) {
     if ($ARGV[0] eq "comment_header_row") {
