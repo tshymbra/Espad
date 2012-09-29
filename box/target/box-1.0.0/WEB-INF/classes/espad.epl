@@ -1,3 +1,0 @@
-@Name('ESPAD_S1')
-@Description('Example Espad EPL, expand this file with your EPL code')
-select * from EspadEvent;

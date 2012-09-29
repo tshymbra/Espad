@@ -1,4 +1,0 @@
-,long timestamp
-EspadEvent,timemark,value,long timestamp
-,long timestamp
-EspadEventExtended,timemark,value,int id,float percent,long timestamp
