@@ -144,26 +144,6 @@
            </execution>
 		</executions>
 		</plugin>				
-		<plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>exec-maven-plugin</artifactId>
-          <configuration>
-              <executable>perl</executable>
-				<arguments>
-					<argument>${project.basedir}/src/main/resources/eventdefs/gen.pl</argument>
-				</arguments>
-              <workingDirectory>${project.basedir}/src/main/resources/eventdefs/</workingDirectory>
-          </configuration>
-           <executions>
-            <execution>
-              <phase>compile</phase>
-                <goals>
-                    <goal>exec</goal>
-                </goals>
-              <inherited>false</inherited>
-            </execution>
-          </executions>
-      </plugin>
 	</plugins>
 	</build>
 </project>
