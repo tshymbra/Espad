@@ -148,7 +148,10 @@
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>exec-maven-plugin</artifactId>
           <configuration>
-              <executable>${project.basedir}/src/main/resources/eventdefs/genenames.cmd</executable>
+              <executable>perl</executable>
+				<arguments>
+					<argument>${project.basedir}/src/main/resources/eventdefs/gen.pl</argument>
+				</arguments>
               <workingDirectory>${project.basedir}/src/main/resources/eventdefs/</workingDirectory>
           </configuration>
            <executions>
