@@ -2,6 +2,7 @@
 use Time::Local 'timelocal';
 chomp ($sedata_fodler = $ARGV[0]); 
 chomp ($comment_header_row = $ARGV[1]); 
+chomp ($using_utc_timemark = $ARGV[2]); 
 
 if (length($sedata_fodler) == 0) { die "Missing events data folder!"; }
  
@@ -25,10 +26,16 @@ foreach $file (@files) {
     next LINE if ( $line eq 1 ) ; #skip header
         
     $timemark = $properties[0];
-    print $timemark."\n";
+    #print $timemark."\n";
 
-    $epoch_seconds = get_epoch_seconds_from_timemark($timemark);
-    print " Epoch seconds =".$epoch_seconds."\n";
+	$epoch_seconds = 0;
+    if ($using_utc_timemark eq "using_utc_timemark") {
+		$epoch_seconds = $timemark;
+	} else {
+		$epoch_seconds = get_epoch_seconds_from_timemark($timemark);
+	}
+
+    #print " Epoch seconds =".$epoch_seconds."\n";
     if ($min_epoch_seconds eq 0) {
       $min_epoch_seconds = $epoch_seconds;
     } elsif ($epoch_seconds < $min_epoch_seconds) {
@@ -42,7 +49,7 @@ foreach $file (@files) {
   close(RAW); 
 } 
 
-print " MIN Epoch seconds =".$min_epoch_seconds."\n";
+#print " MIN Epoch seconds =".$min_epoch_seconds."\n";
  
 foreach $raw_file (@files_with_events) {
   open(RAW, '<',$raw_file) || die("Could not open raw file!");
@@ -66,7 +73,14 @@ foreach $raw_file (@files_with_events) {
         }
     } else {
       $timemark = $properties[0];
-      $epoch_seconds = get_epoch_seconds_from_timemark($timemark);
+	
+	  $epoch_seconds = 0;
+      if ($using_utc_timemark eq "using_utc_timemark") {
+		$epoch_seconds = $timemark;
+	  } else {
+		$epoch_seconds = get_epoch_seconds_from_timemark($timemark);
+	  }
+
       $difference = $epoch_seconds - $min_epoch_seconds;
       #append timestamp to event line
       $event_line =~ s/\r|\n//g;
@@ -96,7 +110,7 @@ sub get_epoch_seconds_from_timemark() {
   my $timemark = shift;
 
   ($hh, $min, $dd, $month, $yyyy) = ($timemark =~ /(\d+):(\d+)\s(\d+)\.(\d+)\.(\d+)/);
-  print "Hour=".$hh." Minute=".$min." Day=".$dd." Month=".$month." Year=".$yyyy."\n";
+  #print "Hour=".$hh." Minute=".$min." Day=".$dd." Month=".$month." Year=".$yyyy."\n";
   # calculate epoch seconds at midnight on that day in this timezone
   if ($hh eq "" || $min eq "" ) {
     return 0;
