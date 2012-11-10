@@ -8,7 +8,7 @@ call setenv.bat
 
 xcopy /Y src\main\resources\eventdefs\tmst.pl target\classes\edefs_%1\
 cd target/classes/edefs_%1/
-perl tmst.pl edata_%1 comment_header_row
+perl tmst.pl edata_%1 comment_header_row using_utc_timemark
 cd ../../../
  
 set MEMORY_OPTIONS=-Xms256m -Xmx256m -XX:+UseParNewGC
