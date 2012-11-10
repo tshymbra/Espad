@@ -59,10 +59,10 @@ This tags can be ussed for grepping to analyse you EPL mathching results.
 EVENT DEFINITIONS
 -----------------
 The file event.names uses simple CSV format where first value is event name. It is followed by event attributes.
-The first attribute is always timemark field. You must provide it.
-The purpose of this field is to provide easy readable time reference that can be used to generate UTC timestamp. 
+The first attribute is always timemark field. You must provide it. It is either UTC timestamp or an easy readable time reference 
+used to generate UTC timestamp. 
 
-Espad uses following datetime format for the timemark field:
+Espad uses following datetime format for time references:
 HH::MM DD.MM.YYYY
 12:09 29.09.2011
 
@@ -80,4 +80,5 @@ This is because httpush has a dependency on ei in the pom.xml - the execution "u
 Secondly the script creates tagged event data folder and copies extracted event definitions into it. 
 You can now edit event data files in this folder to add events into it.
 
-Now execute script run.cmd passing the event data tag as a parameter. It connects the host over HTTP (potr 18079) and sends the events from the event data folder.    
+Now execute script run passing the event data tag as a parameter. It connects the host over HTTP (potr 18079) and sends the events from the event data folder.
+By default run script interprets timemark field as UTC timestamp. To use time reference edit the script and remove occurence of using_utc_timemark there. 
