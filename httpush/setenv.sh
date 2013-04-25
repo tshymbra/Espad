@@ -17,9 +17,9 @@ EE_HOME=..
 CLASSPATH=.:$CLASSPATH
 CLASSPATH=$CLASSPATH:target/classes
 
-CLASSPATH=$CLASSPATH:target/lib/esper-4.6.0.jar
-CLASSPATH=$CLASSPATH:target/lib/esperio-csv-4.6.0.jar
-CLASSPATH=$CLASSPATH:target/lib/esperio-http-4.6.0.jar
+CLASSPATH=$CLASSPATH:target/lib/esper-4.9.0.jar
+CLASSPATH=$CLASSPATH:target/lib/esperio-csv-4.9.0.jar
+CLASSPATH=$CLASSPATH:target/lib/esperio-http-4.9.0.jar
 CLASSPATH=$CLASSPATH:target/lib/httpcore-4.0.1.jar
 CLASSPATH=$CLASSPATH:target/lib/httpclient-4.0.1.jar
 CLASSPATH=$CLASSPATH:target/lib/httpcore-nio-4.0.1.jar

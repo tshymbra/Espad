@@ -1,11 +1,11 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
-	<name>Esper Pad</name>
+	<name>Espad for Esper</name>
 	<groupId>com.espad</groupId>
 	<artifactId>espad</artifactId>
 	<version>1.0.0</version>
 	<packaging>pom</packaging>
-	<description>Esper Pad for EsperEE </description>
+	<description>Espad for Esper</description>
 	<repositories>
 		<repository>
 			<id>central</id>
@@ -28,5 +28,6 @@
 		<module>ei</module>
 		<module>box</module>
 		<module>httpush</module>
+		<module>host</module>
 	</modules>
 </project>

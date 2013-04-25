@@ -24,9 +24,9 @@ if "%HTTPUSH_CLASSPATH_SET%" == "" (
 :setclasspath
 set CLASSPATH=.;%CLASSPATH%
 set CLASSPATH=%CLASSPATH%;target\classes
-set CLASSPATH=%CLASSPATH%;target\lib\esper-4.6.0.jar
-set CLASSPATH=%CLASSPATH%;target\lib\esperio-csv-4.6.0.jar
-set CLASSPATH=%CLASSPATH%;target\lib\esperio-http-4.6.0.jar
+set CLASSPATH=%CLASSPATH%;target\lib\esper-4.9.0.jar
+set CLASSPATH=%CLASSPATH%;target\lib\esperio-csv-4.9.0.jar
+set CLASSPATH=%CLASSPATH%;target\lib\esperio-http-4.9.0.jar
 set CLASSPATH=%CLASSPATH%;target\lib\httpcore-4.0.1.jar
 set CLASSPATH=%CLASSPATH%;target\lib\httpclient-4.0.1.jar
 set CLASSPATH=%CLASSPATH%;target\lib\httpcore-nio-4.0.1.jar
