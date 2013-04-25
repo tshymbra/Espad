@@ -21,13 +21,13 @@ To start box or host CSV Input Adapter and HTTP Adapter along with Java NIO is r
 You have to add required jars to your classpath, please refer to the EsperIO Reference Documentation.
 For example, required Esper IO jars can be copied into lib folder and a following section can be added to setclasspath.bat
 
-'''ruby
+```
 rem Espad dependencies
 set CLASSPATH=%CLASSPATH%;%LIB%\esperio-csv-4.x.0.jar
 set CLASSPATH=%CLASSPATH%;%LIB%\esperio-http-4.x.0.jar
 set CLASSPATH=%CLASSPATH%;%LIB%\httpcore-nio-4.0.1.jar
 set CLASSPATH=%CLASSPATH%;%LIB%\httpcore-4.0.1.jar
-'''
+
 
 (note: replace x with actual Esper minor version)
 
