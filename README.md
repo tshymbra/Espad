@@ -1,12 +1,11 @@
+Esper Pad (Espad) is a harness to help build/test Esper EPL code in distrubuted environments.
+An Espad setup consists of a host process and one or more event providers running in remote processes.
 
-Esper Pad (Espad) is a harness to help build/test Esper EPL code in a distrubuted environments.
-It relies on Esper EE. An Espad setup consists of an Esper EE server (host) running EPL applications 
-and one or more event providers running in remote processes.
+Host process can be either a standalone Java process running Esper engine 
+or it can be an Esper EE server. In any case you have your EPL applications in a separate text file called espad.epl.
 
-In Espad event providers are standalone Esper engines reading events from csv files and sending them to the host over HTTP. 
-Providers send events over http using Esper HTTP adapters.
-Hence Espad can be used to send events into Esper server over the Internet. 
-
+In Espad event providers are standalone Esper engines reading events from csv files and sending them to the host over HTTP using Esper HTTP adapters.
+Hence Espad can be used to send events into Esper host over the Internet. 
 
 PREREQUISITES
 -------------
@@ -18,17 +17,15 @@ For building and dependencies Espad uses maven.
 INSTALL
 --------
 
-To start box host needs CSV Input Adapter and HTTP Adapter along with Java NIO.
+To start box or host CSV Input Adapter and HTTP Adapter along with Java NIO is required.
 You have to add required jars to your classpath, please refer to the EsperIO Reference Documentation.
 For example, required Esper IO jars can be copied into lib folder and a following section can be added to setclasspath.bat
 
-```
 rem Espad dependencies
 set CLASSPATH=%CLASSPATH%;%LIB%\esperio-csv-4.x.0.jar
 set CLASSPATH=%CLASSPATH%;%LIB%\esperio-http-4.x.0.jar
 set CLASSPATH=%CLASSPATH%;%LIB%\httpcore-nio-4.0.1.jar
 set CLASSPATH=%CLASSPATH%;%LIB%\httpcore-4.0.1.jar
-```
 
 (note: replace x with actual Esper minor version)
 
@@ -36,33 +33,42 @@ set CLASSPATH=%CLASSPATH%;%LIB%\httpcore-4.0.1.jar
 cd ei
 mvn clean install -Dmaven.test.skip=true
 
-2. Build box
+2.1. Build box
 cd box
 mvn clean package -Dmaven.test.skip=true
 
-3. Deploy box, by copying created war into the Esper EE hotdeploy folder
+or
  
+2.2. Build host
+cd host
+mvn clean package -Dmaven.test.skip=true
+
+3. Deploy box, by copying created war into the Esper EE hotdeploy folder
+
 
 ARCHITECTURE
 ------------
 
-Espad consists of 3 components:
+Espad consists of 4 components:
  * ei - Event Initializer. Keeps events definitions in a text file event.names
- * box - Holds EPL applications. Depends on ei for event definitions. 
+
+ * host - Standalone Esper server process. Depends on ei for event definitions. 
+ * box - Hosts your EPL applications in an Esper EE environment. Depends on ei for event definitions. 
+
  * httpush - HTTP Event Pusher. Reads events from CSV file and sends them to host over HTTP. Depends on ei for event definitions. 
 
 Espad can be used for accelerated EPL prototyping and testing. 
-The box component installs EPL statements listener to log all statement updates prpending "ESPAD NE" for new events and "ESPAD OU" for old events.
+The host and box install EPL statements listener to log all statement updates prpending "ESPAD NE" for new events and "ESPAD OU" for old events.
 This tags can be ussed for grepping to analyse you EPL mathching results.
 
 
 EVENT DEFINITIONS
 -----------------
 The file event.names uses simple CSV format where first value is event name. It is followed by event attributes.
-The first attribute is always timemark field. You must provide it. It is either UTC timestamp or an easy readable time reference 
-used to generate UTC timestamp. 
+The first attribute is always timemark field. You must provide it.
+The purpose of this field is to provide easy readable time reference that can be used to generate UTC timestamp. 
 
-Espad uses following datetime format for time references:
+Espad uses following datetime format for the timemark field:
 HH::MM DD.MM.YYYY
 12:09 29.09.2011
 
@@ -80,5 +86,10 @@ This is because httpush has a dependency on ei in the pom.xml - the execution "u
 Secondly the script creates tagged event data folder and copies extracted event definitions into it. 
 You can now edit event data files in this folder to add events into it.
 
-Now execute script run passing the event data tag as a parameter. It connects the host over HTTP (potr 18079) and sends the events from the event data folder.
-By default run script interprets timemark field as UTC timestamp. To use time reference edit the script and remove occurence of using_utc_timemark there. 
+Now execute script run.cmd passing the event data tag as a parameter. It connects to the host over HTTP (port 18079) and sends the events from the event data folder.    
+
+LICENSE
+-------
+Copyright © 2013 Taras Shymbra.
+
+Since Esper is GPLv2 licensed, Espad is GPLv2 licensed as well. Please read the [license](http://www.opensource.org/licenses/gpl-2.0.php).
