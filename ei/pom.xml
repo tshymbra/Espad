@@ -59,9 +59,13 @@
           <artifactId>maven-jar-plugin</artifactId>
           <configuration>
            <archive>
-             <addMavenDescriptor/>
-          </archive>
-				</configuration>
+            <addMavenDescriptor/>
+			<manifest>
+                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+            </manifest>
+			</archive>
+		  </configuration>
 				<executions>
 					<execution>
 						<id>make-a-jar</id>
@@ -135,8 +139,7 @@
 		</plugins>
 	</pluginManagement>
   </build>
- 	<sourceDirectory>${basedir}/src</sourceDirectory> 	
- <dependencies>
+  <dependencies>
 		<dependency>
 				<groupId>log4j</groupId>
 				<artifactId>log4j</artifactId>
