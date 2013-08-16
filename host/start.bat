@@ -1,10 +1,10 @@
-@echo on
+@echo off
 
-REM Script to start standalone espad host
-REM Usage start.bat
+REM Script to run auto id RFID example generator
+REM
 
-call cleanp.cmd
 call setenv.bat
 
-set MEMORY_OPTIONS=-Xms256m -Xmx256m -XX:+UseParNewGC 
-"%JAVA_HOME%"\bin\java %MEMORY_OPTIONS% com.espad.host.HostMain
+set MEMORY_OPTIONS=-Xms256m -Xmx256m -XX:+UseParNewGC
+
+"%JAVA_HOME%"\bin\java %MEMORY_OPTIONS% -Dlog4j.configuration=log4j.xml com.espad.host.Main -f=espad.epl

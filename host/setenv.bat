@@ -35,5 +35,6 @@ set CLASSPATH=%CLASSPATH%;target\lib\commons-logging-1.1.1.jar
 set CLASSPATH=%CLASSPATH%;target\lib\log4j-1.2.16.jar
 set CLASSPATH=%CLASSPATH%;target\lib\antlr-runtime-3.2.jar
 set CLASSPATH=%CLASSPATH%;target\lib\ei-1.0.0.jar
+set CLASSPATH=%CLASSPATH%;target\lib\commons-cli-1.2.jar
 
 :EOF
